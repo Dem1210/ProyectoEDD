@@ -4,7 +4,6 @@
  */
 package proyecto_castillo_ordaz_salazar;
 
-import proyecto_castillo_ordaz_salazar.Estacion;
 
 /**
  *
@@ -14,9 +13,11 @@ public class Nodo_Adyacencia {
 
     Nodo_Adyacencia siguiente;
     Estacion dato;
+    int tiempo;
 
-    public Nodo_Adyacencia(Estacion dato) {
+    public Nodo_Adyacencia(Estacion dato, int tiempo) {
         siguiente = null;
         this.dato = dato;
+        this.tiempo = tiempo;
     }
 }

@@ -4,7 +4,6 @@
  */
 package proyecto_castillo_ordaz_salazar;
 
-import proyecto_castillo_ordaz_salazar.Estacion;
 
 
 /**
@@ -19,8 +18,8 @@ public class Lista_Adyacencia {
         this.primero = null;
     }
 
-    public void insertar(Estacion dato) {
-        Nodo_Adyacencia nuevo = new Nodo_Adyacencia(dato);
+    public void insertar(Estacion dato, int tiempo) {
+        Nodo_Adyacencia nuevo = new Nodo_Adyacencia(dato,tiempo);
         Nodo_Adyacencia aux = primero;
 
         if (primero != null) {

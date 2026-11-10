@@ -17,8 +17,8 @@ public class Cola {
         this.ultimo = null;
     }
     
-    public void encolar (Estacion dato) {
-        Nodo_Adyacencia nuevo = new Nodo_Adyacencia (dato);
+    public void encolar (Estacion dato, int tiempo) {
+        Nodo_Adyacencia nuevo = new Nodo_Adyacencia (dato, tiempo);
         
         if (primero != null) {
             ultimo.siguiente = nuevo;

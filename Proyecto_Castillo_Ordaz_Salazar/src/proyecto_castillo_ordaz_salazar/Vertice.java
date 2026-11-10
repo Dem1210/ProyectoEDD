@@ -4,8 +4,6 @@
  */
 package proyecto_castillo_ordaz_salazar;
 
-import proyecto_castillo_ordaz_salazar.Lista_Adyacencia;
-import proyecto_castillo_ordaz_salazar.Estacion;
 
 /**
  *

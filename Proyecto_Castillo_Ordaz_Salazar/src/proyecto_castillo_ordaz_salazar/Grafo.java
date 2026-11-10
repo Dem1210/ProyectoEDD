@@ -4,7 +4,6 @@
  */
 package proyecto_castillo_ordaz_salazar;
 
-import proyecto_castillo_ordaz_salazar.Estacion;
 
 /**
  *
@@ -71,5 +70,15 @@ public class Grafo {
             aux = aux.siguiente;
         }
         return h;
+    }
+    
+    public void insertar_arista(String id1, String id2, int tiempo) {
+        Vertice aux1 = this.buscar(id1);
+        Vertice aux2 = this.buscar(id2);
+        
+        if (aux1 != null && aux2 != null){
+            aux1.lista.insertar(aux2.dato, tiempo);
+            aux2.lista.insertar(aux1.dato, tiempo);
+        }    
     }
 }
