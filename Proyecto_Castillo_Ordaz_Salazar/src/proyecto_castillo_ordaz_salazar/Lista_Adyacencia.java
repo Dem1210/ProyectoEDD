@@ -12,6 +12,7 @@ package proyecto_castillo_ordaz_salazar;
  */
 public class Lista_Adyacencia {
 
+
     Nodo_Adyacencia primero;
 
     public Lista_Adyacencia() {
@@ -30,6 +31,7 @@ public class Lista_Adyacencia {
         } else {
             primero = nuevo;
         }
+
     }
 
     public void eliminar(String id) {
@@ -37,18 +39,23 @@ public class Lista_Adyacencia {
 
         if (primero == null) {
             return;
+
         }
 
         if (id.equals(primero.dato.id)) {
             primero = primero.siguiente;
+
             return;
+
         }
         while (aux.siguiente != null && !aux.siguiente.dato.id.equals(id)) {
             aux = aux.siguiente;
         }
         if (aux.siguiente != null) {
             aux.siguiente = aux.siguiente.siguiente;
+
         }
+
     }
 
     public Nodo_Adyacencia buscar(String id) {
@@ -59,6 +66,8 @@ public class Lista_Adyacencia {
         }
         return aux;
     }
+
+
 
     public String imprimir() {
         Nodo_Adyacencia aux = primero;

@@ -6,6 +6,7 @@ package proyecto_castillo_ordaz_salazar;
 
 /**
  *
+<<<<<<< HEAD
  * @author ydccm
  */
 public class Grafo {
@@ -78,15 +79,19 @@ public class Grafo {
     }
 
     public String imprimir() {
+
         Vertice aux = primero;
         String h = "";
 
         while (aux != null) {
+
             h += aux.dato.id + aux.lista.imprimir2() + "\n";
+
             aux = aux.siguiente;
         }
         return h;
     }
+
 
     public void insertar_arista(String id1, String id2, int tiempo) {
         Vertice aux1 = this.buscar(id1);
@@ -96,5 +101,6 @@ public class Grafo {
             aux1.lista.insertar(aux2.dato, tiempo);
             aux2.lista.insertar(aux1.dato, tiempo);
         }
+
     }
 }

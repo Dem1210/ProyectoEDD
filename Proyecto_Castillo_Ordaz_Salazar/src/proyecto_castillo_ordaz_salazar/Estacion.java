@@ -23,4 +23,4 @@ public class Estacion {
         this.zona = zona;
         this.cap_pasajeros_hora = cap_pasajeros_hora;
     }
-}
+    }
