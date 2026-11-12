@@ -8,96 +8,102 @@ package proyecto_castillo_ordaz_salazar;
  *
  * @author ameli
  */
-public class TablaHash<V> {
-    private static final double FACTOR_CARGA_MAX = 0.75;
+public class TablaHash {
 
-    private static class Nodo<V> {
-        final String clave; V valor; Nodo<V> sig;
-        Nodo(String clave, V valor, Nodo<V> sig) { this.clave = clave; this.valor = valor; this.sig = sig; }
+    Vertice[] tablahash;
+    int capacidad;
+    int total_estaciones;
+
+    public TablaHash(int capacidad) {
+        tablahash = new Vertice[capacidad];
+        this.capacidad = capacidad;
+        this.total_estaciones = 0;
     }
 
-    private Nodo<V>[] cubetas;
-    private int tamano;
+    public int hash(String id) {
+        int dx = 0;
 
-
-    @SuppressWarnings("unchecked")
-    public TablaHash(int capacidadInicial) {
-        cubetas = (Nodo<V>[]) new Nodo[Math.max(11, capacidadInicial)];
-    }
-
-
-    private int indice(String clave, int largo) {
-        int h = 0;
-        for (int i = 0; i < clave.length(); i++) h = 31 * h + clave.charAt(i);
-        return (h & 0x7fffffff) % largo;
-    }
-
-  
-    public void poner(String clave, V valor) {
-        int i = indice(clave, cubetas.length);
-        for (Nodo<V> n = cubetas[i]; n != null; n = n.sig) {
-            if (n.clave.equals(clave)) { n.valor = valor; return; }
+        for (int i = 0; i < id.length(); i++) {
+            dx += id.charAt(i) + dx * 31;
         }
-        cubetas[i] = new Nodo<>(clave, valor, cubetas[i]);
-        tamano++;
-        if (tamano > cubetas.length * FACTOR_CARGA_MAX) rehash();
+
+        if (dx < 0) {
+            dx -= 2 * dx;
+        }
+        return dx % capacidad;
     }
-
-
-    public V obtener(String clave) {
-        for (Nodo<V> n = cubetas[indice(clave, cubetas.length)]; n != null; n = n.sig) {
-            if (n.clave.equals(clave)) return n.valor;
+    
+    public void insertar (Vertice v) {
+        int indice = hash(v.dato.id);
+        Vertice aux = tablahash[indice];
+        
+        if (aux == null) {
+            tablahash[indice] = v;
+        }
+        else {
+            while (aux.siguiente != null) {
+                aux = aux.siguiente;
+            }
+            
+            aux.siguiente = v;
+        }
+        total_estaciones ++;
+        
+        if (total_estaciones == capacidad) {
+            this.redimensionar();
+        }
+        
+    }
+    
+    public void eliminar (String id) {
+        int indice = hash(id);
+        Vertice aux = tablahash[indice];
+        
+        if (aux == null) {
+            return;
+        }
+        
+        if (aux.dato.id.equals(id)) {
+            tablahash[indice] = aux.siguiente;
+            total_estaciones --;
+            return;
+        }
+        
+        while (aux.siguiente != null) {
+            if (aux.siguiente.dato.id.equals(id)){
+                aux.siguiente = aux.siguiente.siguiente;
+                total_estaciones --;
+            }
+            aux = aux.siguiente;
+        }
+        
+    }
+    
+    public Vertice buscar (String id) {
+        int indice = hash(id);
+        Vertice aux = tablahash[indice];
+        
+        while (aux != null) {
+            if (aux.dato.id.equals(id)){
+                return aux;
+            }
+            aux = aux.siguiente;
         }
         return null;
     }
-
-
-    public boolean contiene(String clave) {
-        for (Nodo<V> n = cubetas[indice(clave, cubetas.length)]; n != null; n = n.sig) {
-            if (n.clave.equals(clave)) return true;
-        }
-        return false;
-    }
-
-
-    public boolean eliminar(String clave) {
-        int i = indice(clave, cubetas.length);
-        Nodo<V> previo = null;
-        for (Nodo<V> n = cubetas[i]; n != null; previo = n, n = n.sig) {
-            if (n.clave.equals(clave)) {
-                if (previo == null) cubetas[i] = n.sig; else previo.sig = n.sig;
-                tamano--;
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    public int tamano() { return tamano; }
-
-  
-    public String[] claves() {
-        String[] res = new String[tamano];
-        int k = 0;
-        for (int i = 0; i < cubetas.length; i++)
-            for (Nodo<V> n = cubetas[i]; n != null; n = n.sig) res[k++] = n.clave;
-        return res;
-    }
-
-
-    @SuppressWarnings("unchecked")
-    private void rehash() {
-        Nodo<V>[] viejas = cubetas;
-        cubetas = (Nodo<V>[]) new Nodo[viejas.length * 2 + 1];
-        for (int i = 0; i < viejas.length; i++) {
-            Nodo<V> n = viejas[i];
-            while (n != null) {
-                Nodo<V> sig = n.sig;
-                int j = indice(n.clave, cubetas.length);
-                n.sig = cubetas[j];
-                cubetas[j] = n;
-                n = sig;
+    
+    public void redimensionar() {
+        Vertice [] arregloviejo = tablahash;
+        
+        tablahash = new Vertice [capacidad * 2];
+        capacidad = capacidad * 2;
+        total_estaciones = 0;
+        
+        for (Vertice aux : arregloviejo) {
+            while (aux != null) {
+                this.insertar(aux);
+                aux = aux.siguiente;
+                
             }
         }
     }
