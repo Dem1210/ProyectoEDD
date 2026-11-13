@@ -5,13 +5,12 @@
 package proyecto_castillo_ordaz_salazar;
 
 /**
+ * Cola de nodos, usada en el recorrido BFS.
  *
  * @author ydccm
  */
 public class Cola {
- 
     Nodo_Adyacencia primero;
-
     Nodo_Adyacencia ultimo;
 
     /** Crea una cola vacía. */
@@ -20,7 +19,7 @@ public class Cola {
         this.ultimo = null;
     }
 
-
+    /** Agrega una estación al final de la cola. */
     public void encolar (Estacion dato, int tiempo) {
         Nodo_Adyacencia nuevo = new Nodo_Adyacencia (dato, tiempo);
 
@@ -34,23 +33,18 @@ public class Cola {
         }
     }
 
-
+    /** Saca el primer nodo de la cola (null si está vacía). */
     public Nodo_Adyacencia desencolar () {
         Nodo_Adyacencia aux = primero;
 
         if (primero != null){
             primero = primero.siguiente;
-            if (primero == null) {
-                ultimo = null;
-            }
-            aux.siguiente = null;
         }
         return aux;
     }
 
-    /** @return true si no hay elementos */
+    /** Indica si la cola está vacía. */
     public boolean vacia () {
         return primero == null;
     }
 }
-

@@ -5,33 +5,35 @@
 package proyecto_castillo_ordaz_salazar;
 
 /**
+ * Grafo no dirigido y ponderado. Los vértices están en una lista y además
+ * indexados en una tabla hash para buscarlos rápido por id.
  *
- * @author ameli
+ * @author ydccm
  */
 public class Grafo {
 
-
     Vertice primero;
     private Vertice ultimo;
-    private final TablaHash<Vertice> indice = new TablaHash<>(64);
+    private TablaHash<Vertice> indice = new TablaHash<>(211);
     private int numVertices;
     private int numAristas;
 
-
+    /** Crea un grafo vacío. */
     public Grafo() {
         this.primero = null;
-        this.ultimo = null;
     }
-    
+
+    /** Inserta una estación; devuelve false si es nula o ya existe el id. */
     public boolean insertar(Estacion dato) {
-        if (dato == null || indice.contiene(dato.id)) {
+        if (dato == null || buscar(dato.id) != null) {
             return false;
         }
         Vertice nuevo = new Vertice(dato);
-        if (primero == null) {
-            primero = nuevo;
-        } else {
+
+        if (primero != null) {
             ultimo.siguiente = nuevo;
+        } else {
+            primero = nuevo;
         }
         ultimo = nuevo;
         indice.poner(dato.id, nuevo);
@@ -39,17 +41,16 @@ public class Grafo {
         return true;
     }
 
-
+    /** Elimina una estación y todas sus conexiones; devuelve el vértice o null. */
     public Vertice eliminar(String id) {
         Vertice v = buscar(id);
+
         if (v == null) {
             return null;
         }
         for (Nodo_Adyacencia n = v.lista.primero; n != null; n = n.siguiente) {
-            Vertice vecino = indice.obtener(n.dato.id);
-            if (vecino != null && vecino.lista.eliminar(id)) {
-                numAristas--;
-            }
+            buscar(n.dato.id).lista.eliminar(id);
+            numAristas--;
         }
         if (primero == v) {
             primero = v.siguiente;
@@ -66,13 +67,12 @@ public class Grafo {
                 ultimo = aux;
             }
         }
-        v.siguiente = null;
         indice.eliminar(id);
         numVertices--;
         return v;
     }
 
- 
+    /** Busca un vértice por id usando la tabla hash (null si no existe). */
     public Vertice buscar (String id) {
         if (id == null) {
             return null;
@@ -80,7 +80,7 @@ public class Grafo {
         return indice.obtener(id);
     }
 
- 
+    /** Devuelve cada estación con sus vecinos, una por línea. */
     public String imprimir () {
         Vertice aux = primero;
         String h = "";
@@ -92,14 +92,12 @@ public class Grafo {
         return h;
     }
 
+    /** Conecta dos estaciones (si ya estaban conectadas actualiza el tiempo). Devuelve false si los datos no son válidos. */
     public boolean insertar_arista(String id1, String id2, int tiempo) {
-        if (id1 == null || id2 == null || id1.equals(id2) || tiempo <= 0) {
-            return false;
-        }
         Vertice aux1 = this.buscar(id1);
         Vertice aux2 = this.buscar(id2);
 
-        if (aux1 == null || aux2 == null) {
+        if (aux1 == null || aux2 == null || aux1 == aux2 || tiempo <= 0) {
             return false;
         }
         Nodo_Adyacencia existente = aux1.lista.buscar(id2);
@@ -114,7 +112,7 @@ public class Grafo {
         return true;
     }
 
-
+    /** Elimina la conexión entre dos estaciones; devuelve true si existía. */
     public boolean eliminar_arista(String id1, String id2) {
         Vertice aux1 = this.buscar(id1);
         Vertice aux2 = this.buscar(id2);
@@ -127,12 +125,13 @@ public class Grafo {
         return true;
     }
 
+    /** Número de conexiones directas de una estación. */
     public int grado(String id) {
         Vertice v = buscar(id);
         return v == null ? 0 : v.lista.tamano;
     }
 
-
+    /** Ids de todas las estaciones, en orden de inserción. */
     public String[] ids() {
         String[] res = new String[numVertices];
         int i = 0;
@@ -142,11 +141,12 @@ public class Grafo {
         return res;
     }
 
-
+    /** Cantidad de estaciones. */
     public int numVertices() {
         return numVertices;
     }
 
+    /** Cantidad de conexiones. */
     public int numAristas() {
         return numAristas;
     }
