@@ -15,12 +15,19 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /** Ventana principal: botones, dibujo de la red y área de resultados. */
+/**
+ * Ventana principal de UrbanRoute. Coordina la interfaz Swing, las operaciones sobre el grafo, la persistencia CSV y los analizadores.
+ * @author ameli
+ */
 public class VentanaPrincipal extends JFrame {
     private Grafo grafo = new Grafo();
     private final GestorCSV gestor = new GestorCSV();
     private final PanelGrafo panel = new PanelGrafo(); 
     private String[] rutaActual = new String[0];
 
+/**
+ * Construye y configura la ventana principal, sus controles y los manejadores de eventos de la interfaz.
+ */
     public VentanaPrincipal() {
         super("UrbanRoute - Red de Transporte Multimodal");
         initComponents();
@@ -167,6 +174,9 @@ public class VentanaPrincipal extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /** Carga el archivo maestro datos/conexiones.csv al iniciar, si existe. */
+/**
+ * Intenta cargar la red inicial del proyecto desde el archivo maestro configurado y actualiza la vista.
+ */
     public void cargarPorDefecto() {
         File f = new File("datos/conexiones.csv");
         if (f.exists()) cargarDesde(f);
@@ -375,6 +385,45 @@ public class VentanaPrincipal extends JFrame {
         for (int i = 0; i < orden.length && i < 5; i++)
             log("  " + (i + 1) + ". " + grafo.buscar(orden[i]).dato + " - " + grafo.grado(orden[i]) + " conexiones" + (grafo.grado(orden[i]) == max ? "  <- HUB" : ""));
     }
+
+    // Eventos de los botones (asociados en initComponents).
+
+    private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {
+        cargarArchivo();
+    }
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {
+        guardar();
+    }
+
+    private void btnAgregarEstacionActionPerformed(java.awt.event.ActionEvent evt) {
+        agregarEstacion();
+    }
+
+    private void btnAgregarConexionActionPerformed(java.awt.event.ActionEvent evt) {
+        agregarConexion();
+    }
+
+    private void btnEliminarEstacionActionPerformed(java.awt.event.ActionEvent evt) {
+        eliminarEstacion();
+    }
+
+    private void btnEliminarConexionActionPerformed(java.awt.event.ActionEvent evt) {
+        eliminarConexion();
+    }
+
+    private void btnRutaActionPerformed(java.awt.event.ActionEvent evt) {
+        mostrarRuta();
+    }
+
+    private void btnSubredesActionPerformed(java.awt.event.ActionEvent evt) {
+        mostrarSubredes();
+    }
+
+    private void btnHubsActionPerformed(java.awt.event.ActionEvent evt) {
+        mostrarHubs();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarConexion;
     private javax.swing.JButton btnAgregarEstacion;

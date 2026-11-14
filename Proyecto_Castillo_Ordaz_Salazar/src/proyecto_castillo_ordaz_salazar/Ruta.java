@@ -4,17 +4,23 @@
  */
 package proyecto_castillo_ordaz_salazar;
 
+
 /**
- *Resultado de buscar la ruta de menor tiempo.
+ * Contiene el resultado de una consulta de ruta óptima: estaciones del recorrido, tiempo total e indicador de existencia de camino.
  * @author ameli
  */
-
 public class Ruta {
     String[] estaciones;
     int tiempo;
     boolean existe;
 
     /** Crea una ruta con los ids del recorrido, el tiempo total y si existe camino. */
+/**
+ * Construye el resultado de una consulta de ruta óptima.
+ * @param estaciones identificadores de las estaciones en el orden del recorrido.
+ * @param tiempo suma de los tiempos de traslado, en minutos.
+ * @param existe indica si se encontró un camino entre el origen y el destino.
+ */
     public Ruta(String[] estaciones, int tiempo, boolean existe) {
         this.estaciones = estaciones;
         this.tiempo = tiempo;

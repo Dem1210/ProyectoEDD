@@ -6,8 +6,7 @@ package proyecto_castillo_ordaz_salazar;
 
 
 /**
- * Nodo de la lista de adyacencia: estación vecina y tiempo de viaje.
- *
+ * Representa una conexión de la lista de adyacencia, con la estación vecina, el tiempo de traslado y el enlace al siguiente nodo.
  * @author ydccm
  */
 public class Nodo_Adyacencia {
@@ -17,6 +16,11 @@ public class Nodo_Adyacencia {
     int tiempo;
 
     /** Crea un nodo con la estación vecina y el tiempo en minutos. */
+/**
+ * Construye un nodo de adyacencia para una estación vecina.
+ * @param dato estación a la que apunta la conexión.
+ * @param tiempo tiempo de traslado asociado, en minutos.
+ */
     public Nodo_Adyacencia(Estacion dato, int tiempo) {
         siguiente = null;
         this.dato = dato;

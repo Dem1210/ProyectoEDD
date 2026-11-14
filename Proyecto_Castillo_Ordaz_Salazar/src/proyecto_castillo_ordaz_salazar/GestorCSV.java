@@ -14,9 +14,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 /**
- * Lee y guarda los archivos CSV: conexiones.csv (origen, destino, minutos)
- * y estaciones.csv (datos de cada estación, en la misma carpeta).
- * 
+ * Gestiona la lectura y escritura de los archivos CSV de estaciones y conexiones, así como el estado de cambios pendientes de guardar.
  * @author ameli
  */
 public class GestorCSV {
@@ -25,27 +23,49 @@ public class GestorCSV {
     private boolean modificado;
 
     /** Indica si hay cambios sin guardar. */
+/**
+ * Consulta si la red en memoria tiene modificaciones pendientes de persistir.
+ * @return true cuando hay cambios sin guardar; false en caso contrario.
+ */
     public boolean hayCambios() {
         return modificado;
     }
 
     /** Marca que la red en memoria cambió. */
+/**
+ * Marca la información en memoria como modificada.
+ */
     public void marcarModificado() {
         modificado = true;
     }
 
     /** Devuelve el archivo de conexiones cargado (null si no hay). */
+/**
+ * Obtiene el archivo CSV de conexiones asociado al gestor.
+ * @return archivo de conexiones o null si todavía no se ha definido.
+ */
     public File getArchivoConexiones() {
         return archivoConexiones;
     }
 
     /** Define el archivo donde se guardará; estaciones.csv queda en la misma carpeta. */
+/**
+ * Establece el archivo CSV de conexiones y asigna estaciones.csv en la misma carpeta.
+ * @param conexiones archivo CSV que almacenará las conexiones.
+ */
     public void definirDestino(File conexiones) {
         archivoConexiones = conexiones;
         archivoEstaciones = new File(conexiones.getAbsoluteFile().getParentFile(), "estaciones.csv");
     }
 
     /** Carga la red desde el CSV. Las líneas inválidas se ignoran y se anotan en el informe. */
+/**
+ * Carga estaciones y conexiones desde los archivos CSV ubicados en la carpeta del archivo seleccionado. Las incidencias se agregan al informe.
+ * @param f archivo CSV seleccionado por el usuario.
+ * @param informe acumulador donde se registran advertencias y errores de filas.
+ * @return grafo construido con los registros válidos.
+ * @throws IOException si ocurre un error de lectura.
+ */
     public Grafo cargar(File f, StringBuilder informe) throws IOException {
         File carpeta = f.getAbsoluteFile().getParentFile();
         File est = new File(carpeta, "estaciones.csv");
@@ -67,6 +87,11 @@ public class GestorCSV {
     }
 
     /** Guarda la red en memoria en los archivos CSV. */
+/**
+ * Persiste las estaciones y conexiones del grafo en los archivos CSV asociados al gestor.
+ * @param g grafo cuyos datos se escribirán en disco.
+ * @throws IOException si no hay destino definido o se produce un error de escritura.
+ */
     public void guardar(Grafo g) throws IOException {
         if (archivoConexiones == null) {
             throw new IOException("No hay archivo destino definido.");

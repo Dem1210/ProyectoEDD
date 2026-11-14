@@ -5,12 +5,17 @@
 package proyecto_castillo_ordaz_salazar;
 
 /**
- *
+ * Analiza la conectividad de la red de transporte mediante recorridos BFS y calcula las estaciones con mayor grado.
  * @author ameli
  */
 public class AnalizadorRed {
 
     /** Marca cada vértice con su número de subred (BFS) y devuelve cuántas subredes hay. */
+/**
+ * Identifica las componentes conexas mediante búsqueda en anchura (BFS) y marca cada vértice con el número de componente al que pertenece.
+ * @param g grafo que se desea analizar.
+ * @return cantidad de componentes conexas encontradas.
+ */
     public static int componentes(Grafo g) {
         for (Vertice v = g.primero; v != null; v = v.siguiente) {
             v.visitado = false;
@@ -43,6 +48,11 @@ public class AnalizadorRed {
     }
 
     /** Devuelve los ids ordenados de mayor a menor número de conexiones. */
+/**
+ * Obtiene los identificadores de las estaciones ordenados de mayor a menor grado.
+ * @param g grafo cuyas estaciones se van a clasificar.
+ * @return arreglo de identificadores ordenado por grado descendente.
+ */
     public static String[] hubs(Grafo g) {
         String[] ids = g.ids();
 

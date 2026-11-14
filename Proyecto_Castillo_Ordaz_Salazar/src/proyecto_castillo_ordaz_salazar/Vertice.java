@@ -1,9 +1,7 @@
 package proyecto_castillo_ordaz_salazar;
 
 /**
- * Vértice del grafo: una estación con su lista de conexiones.
- * Los campos finales los usan los algoritmos y el dibujo.
- *
+ * Representa un vértice del grafo asociado a una estación y a su lista de adyacencia. También almacena datos auxiliares usados por los algoritmos y el dibujo.
  * @author ydccm
  */
 public class Vertice {
@@ -20,6 +18,10 @@ public class Vertice {
     double y;
 
     /** Crea un vértice con su lista de adyacencia vacía. */
+/**
+ * Crea un vértice para la estación indicada e inicializa su lista de adyacencia vacía.
+ * @param dato estación representada por este vértice.
+ */
     public Vertice(Estacion dato) {
         this.siguiente = null;
         this.dato = dato;

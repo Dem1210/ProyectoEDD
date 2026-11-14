@@ -5,8 +5,7 @@
 package proyecto_castillo_ordaz_salazar;
 
 /**
- * Lista enlazada con las conexiones de una estación.
- *
+ * Implementa una lista enlazada simple con las conexiones de una estación y sus tiempos de traslado.
  * @author ydccm
  */
 public class Lista_Adyacencia {
@@ -15,12 +14,20 @@ public class Lista_Adyacencia {
     int tamano;
 
     /** Crea una lista vacía. */
+/**
+ * Inicializa una lista de adyacencia vacía.
+ */
     public Lista_Adyacencia() {
         this.primero = null;
         this.tamano = 0;
     }
 
     /** Inserta una conexión al final. */
+/**
+ * Agrega al final una conexión hacia la estación indicada.
+ * @param dato estación vecina que se almacenará.
+ * @param tiempo tiempo de traslado asociado, en minutos.
+ */
     public void insertar(Estacion dato, int tiempo) {
         Nodo_Adyacencia nuevo = new Nodo_Adyacencia(dato,tiempo);
         Nodo_Adyacencia aux = primero;
@@ -37,6 +44,11 @@ public class Lista_Adyacencia {
     }
 
     /** Elimina la conexión hacia el id indicado; devuelve true si existía. */
+/**
+ * Elimina de la lista la conexión que apunta a la estación indicada.
+ * @param id identificador de la estación vecina que se eliminará.
+ * @return true si se encontró y eliminó; false si no existía.
+ */
     public boolean eliminar(String id) {
         Nodo_Adyacencia aux = primero;
 
@@ -61,6 +73,11 @@ public class Lista_Adyacencia {
     }
 
     /** Busca la conexión hacia el id indicado (null si no existe). */
+/**
+ * Busca una conexión por el identificador de la estación vecina.
+ * @param id identificador que se desea localizar.
+ * @return nodo encontrado o null si no existe.
+ */
     public Nodo_Adyacencia buscar(String id) {
         Nodo_Adyacencia aux = primero;
 
@@ -71,6 +88,10 @@ public class Lista_Adyacencia {
     }
 
     /** Devuelve los ids de los vecinos. */
+/**
+ * Genera una cadena con los identificadores de las estaciones vecinas.
+ * @return representación textual de los vecinos de esta lista.
+ */
     public String imprimir2(){
         Nodo_Adyacencia aux = primero;
         String im = "";
