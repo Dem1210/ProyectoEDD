@@ -31,7 +31,7 @@ public class GestorCSV {
         return modificado;
     }
 
-    /** Marca que la red en memoria cambió. */
+
 /**
  * Marca la información en memoria como modificada.
  */
@@ -39,7 +39,7 @@ public class GestorCSV {
         modificado = true;
     }
 
-    /** Devuelve el archivo de conexiones cargado (null si no hay). */
+
 /**
  * Obtiene el archivo CSV de conexiones asociado al gestor.
  * @return archivo de conexiones o null si todavía no se ha definido.
@@ -48,7 +48,7 @@ public class GestorCSV {
         return archivoConexiones;
     }
 
-    /** Define el archivo donde se guardará; estaciones.csv queda en la misma carpeta. */
+
 /**
  * Establece el archivo CSV de conexiones y asigna estaciones.csv en la misma carpeta.
  * @param conexiones archivo CSV que almacenará las conexiones.
@@ -58,7 +58,7 @@ public class GestorCSV {
         archivoEstaciones = new File(conexiones.getAbsoluteFile().getParentFile(), "estaciones.csv");
     }
 
-    /** Carga la red desde el CSV. Las líneas inválidas se ignoran y se anotan en el informe. */
+
 /**
  * Carga estaciones y conexiones desde los archivos CSV ubicados en la carpeta del archivo seleccionado. Las incidencias se agregan al informe.
  * @param f archivo CSV seleccionado por el usuario.

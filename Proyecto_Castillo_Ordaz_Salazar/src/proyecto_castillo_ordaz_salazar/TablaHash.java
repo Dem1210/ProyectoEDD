@@ -6,7 +6,7 @@ package proyecto_castillo_ordaz_salazar;
 
 
 /**
- * Implementación propia de una tabla hash genérica con encadenamiento separado para resolver colisiones. No utiliza Java Collections Framework.
+ * Implementaciónde una tabla hash genérica con encadenamiento separado para resolver colisiones. 
  * @author ameli
  */
 public class TablaHash<V> {
@@ -24,7 +24,7 @@ public class TablaHash<V> {
 
     private Nodo<V>[] tabla;
 
-    /** Crea la tabla con la cantidad de posiciones indicada. */
+
 /**
  * Crea una tabla hash con la capacidad indicada y encadenamiento separado para resolver colisiones.
  * @param capacidad cantidad de cubetas de la tabla; debe ser mayor que cero.
@@ -43,7 +43,6 @@ public class TablaHash<V> {
         return Math.abs(suma % tabla.length);
     }
 
-    /** Guarda el valor; si la clave ya existe lo reemplaza. */
 /**
  * Inserta una asociación clave-valor. Si la clave ya existe, reemplaza el valor almacenado.
  * @param clave identificador textual de la entrada.
@@ -62,7 +61,7 @@ public class TablaHash<V> {
         tabla[i] = nuevo;
     }
 
-    /** Devuelve el valor de la clave o null si no existe. */
+
 /**
  * Busca una clave y devuelve el valor asociado.
  * @param clave identificador que se desea consultar.
@@ -77,7 +76,7 @@ public class TablaHash<V> {
         return null;
     }
 
-    /** Elimina la clave de la tabla. */
+ 
 /**
  * Elimina la asociación correspondiente a la clave indicada, si existe.
  * @param clave identificador de la entrada que se eliminará.

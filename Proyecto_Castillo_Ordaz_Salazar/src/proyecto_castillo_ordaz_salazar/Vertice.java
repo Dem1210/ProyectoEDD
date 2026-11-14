@@ -17,7 +17,7 @@ public class Vertice {
     double x;
     double y;
 
-    /** Crea un vértice con su lista de adyacencia vacía. */
+
 /**
  * Crea un vértice para la estación indicada e inicializa su lista de adyacencia vacía.
  * @param dato estación representada por este vértice.

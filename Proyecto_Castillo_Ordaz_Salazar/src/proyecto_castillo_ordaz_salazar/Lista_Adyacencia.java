@@ -14,15 +14,13 @@ public class Lista_Adyacencia {
     int tamano;
 
     /** Crea una lista vacía. */
-/**
- * Inicializa una lista de adyacencia vacía.
- */
+
     public Lista_Adyacencia() {
         this.primero = null;
         this.tamano = 0;
     }
 
-    /** Inserta una conexión al final. */
+
 /**
  * Agrega al final una conexión hacia la estación indicada.
  * @param dato estación vecina que se almacenará.
@@ -43,7 +41,7 @@ public class Lista_Adyacencia {
         tamano++;
     }
 
-    /** Elimina la conexión hacia el id indicado; devuelve true si existía. */
+
 /**
  * Elimina de la lista la conexión que apunta a la estación indicada.
  * @param id identificador de la estación vecina que se eliminará.
@@ -72,7 +70,7 @@ public class Lista_Adyacencia {
         return false;
     }
 
-    /** Busca la conexión hacia el id indicado (null si no existe). */
+
 /**
  * Busca una conexión por el identificador de la estación vecina.
  * @param id identificador que se desea localizar.

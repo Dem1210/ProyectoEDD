@@ -14,7 +14,7 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-/** Ventana principal: botones, dibujo de la red y área de resultados. */
+
 /**
  * Ventana principal de UrbanRoute. Coordina la interfaz Swing, las operaciones sobre el grafo, la persistencia CSV y los analizadores.
  * @author ameli
@@ -173,7 +173,7 @@ public class VentanaPrincipal extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /** Carga el archivo maestro datos/conexiones.csv al iniciar, si existe. */
+ 
 /**
  * Intenta cargar la red inicial del proyecto desde el archivo maestro configurado y actualiza la vista.
  */

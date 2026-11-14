@@ -17,14 +17,12 @@ public class Grafo {
     private int numAristas;
 
     /** Crea un grafo vacío. */
-/**
- * Crea un grafo vacío e inicializa su índice hash.
- */
+
     public Grafo() {
         this.primero = null;
     }
 
-    /** Inserta una estación; devuelve false si es nula o ya existe el id. */
+
 /**
  * Agrega una estación como nuevo vértice y la registra en la tabla hash.
  * @param dato estación que se desea insertar.
@@ -47,7 +45,7 @@ public class Grafo {
         return true;
     }
 
-    /** Elimina una estación y todas sus conexiones; devuelve el vértice o null. */
+
 /**
  * Elimina el vértice identificado y todas sus conexiones incidentes, actualizando la lista, los contadores y la tabla hash.
  * @param id identificador de la estación que se eliminará.
@@ -112,7 +110,7 @@ public class Grafo {
         return h;
     }
 
-    /** Conecta dos estaciones (si ya estaban conectadas actualiza el tiempo). Devuelve false si los datos no son válidos. */
+
 /**
  * Crea una conexión no dirigida entre dos estaciones. Si ya existe, actualiza el tiempo en ambos sentidos.
  * @param id1 identificador de la primera estación.
@@ -139,7 +137,7 @@ public class Grafo {
         return true;
     }
 
-    /** Elimina la conexión entre dos estaciones; devuelve true si existía. */
+
 /**
  * Elimina la conexión no dirigida entre dos estaciones.
  * @param id1 identificador de la primera estación.
@@ -158,7 +156,6 @@ public class Grafo {
         return true;
     }
 
-    /** Número de conexiones directas de una estación. */
 /**
  * Calcula el número de conexiones directas de una estación.
  * @param id identificador de la estación.
@@ -169,7 +166,7 @@ public class Grafo {
         return v == null ? 0 : v.lista.tamano;
     }
 
-    /** Ids de todas las estaciones, en orden de inserción. */
+
 /**
  * Obtiene los identificadores de todas las estaciones en orden de inserción.
  * @return arreglo con los identificadores de los vértices.
@@ -183,7 +180,7 @@ public class Grafo {
         return res;
     }
 
-    /** Cantidad de estaciones. */
+
 /**
  * Obtiene la cantidad actual de estaciones del grafo.
  * @return número de vértices.
@@ -192,7 +189,6 @@ public class Grafo {
         return numVertices;
     }
 
-    /** Cantidad de conexiones. */
 /**
  * Obtiene la cantidad actual de conexiones no dirigidas del grafo.
  * @return número de aristas.

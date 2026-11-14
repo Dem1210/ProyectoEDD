@@ -6,7 +6,7 @@ package proyecto_castillo_ordaz_salazar;
 
 /**
  * Implementación propia de una cola enlazada utilizada como estructura auxiliar para recorridos en anchura (BFS).
- * @author ameli
+ * @author ydccm
  */
 public class Cola {
     Nodo_Adyacencia primero;

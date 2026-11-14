@@ -12,9 +12,9 @@ public class AnalizadorRed {
 
     /** Marca cada vértice con su número de subred (BFS) y devuelve cuántas subredes hay. */
 /**
- * Identifica las componentes conexas mediante búsqueda en anchura (BFS) y marca cada vértice con el número de componente al que pertenece.
+ * Identifica las componentes relacionadas mediante búsqueda en anchura (BFS) y marca cada vértice con el número de componente al que pertenece.
  * @param g grafo que se desea analizar.
- * @return cantidad de componentes conexas encontradas.
+ * @return cantidad de componentes relacionadas encontradas.
  */
     public static int componentes(Grafo g) {
         for (Vertice v = g.primero; v != null; v = v.siguiente) {

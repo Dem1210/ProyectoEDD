@@ -19,10 +19,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 /** Panel que dibuja la red: nodos en círculo, un color por subred y la ruta en rojo. */
-/**
- * Componente Swing encargado de dibujar la red de transporte, distinguir componentes, resaltar rutas y permitir mover vértices con el ratón.
- 
- */
+
 public class PanelGrafo extends JPanel {
     private static final Color[] COLORES = {
         new Color(79, 157, 222), new Color(107, 191, 89), new Color(232, 163, 61), new Color(176, 112, 214),
@@ -36,9 +33,7 @@ public class PanelGrafo extends JPanel {
     private Vertice arrastrado;
 
     /** Crea el panel y activa el arrastre de nodos con el ratón. */
-/**
- * Inicializa el panel de dibujo y registra los eventos del ratón para permitir mover los vértices.
- */
+
     public PanelGrafo() {
         setBackground(Color.WHITE);
         MouseAdapter raton = new MouseAdapter() {
@@ -60,7 +55,7 @@ public class PanelGrafo extends JPanel {
         addMouseMotionListener(raton);
     }
 
-    /** Redibuja la red; los ids de la ruta (si hay) se resaltan en rojo. */
+
 /**
  * Asocia el grafo al panel, recalcula los componentes y dispone inicialmente los vértices en forma circular.
  * @param g grafo que se representará.

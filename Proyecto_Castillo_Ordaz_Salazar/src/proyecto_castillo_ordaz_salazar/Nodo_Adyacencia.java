@@ -17,7 +17,6 @@ public class Nodo_Adyacencia {
 
     /** Crea un nodo con la estación vecina y el tiempo en minutos. */
 /**
- * Construye un nodo de adyacencia para una estación vecina.
  * @param dato estación a la que apunta la conexión.
  * @param tiempo tiempo de traslado asociado, en minutos.
  */

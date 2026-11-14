@@ -14,7 +14,6 @@ public class Ruta {
     int tiempo;
     boolean existe;
 
-    /** Crea una ruta con los ids del recorrido, el tiempo total y si existe camino. */
 /**
  * Construye el resultado de una consulta de ruta óptima.
  * @param estaciones identificadores de las estaciones en el orden del recorrido.
