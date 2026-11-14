@@ -14,7 +14,6 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-/** Ventana principal: botones, dibujo de la red y área de resultados. */
 public class VentanaPrincipal extends JFrame {
     private Grafo grafo = new Grafo();
     private final GestorCSV gestor = new GestorCSV();
@@ -375,6 +374,45 @@ public class VentanaPrincipal extends JFrame {
         for (int i = 0; i < orden.length && i < 5; i++)
             log("  " + (i + 1) + ". " + grafo.buscar(orden[i]).dato + " - " + grafo.grado(orden[i]) + " conexiones" + (grafo.grado(orden[i]) == max ? "  <- HUB" : ""));
     }
+
+    // Eventos de los botones (asociados en initComponents).
+
+    private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {
+        cargarArchivo();
+    }
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {
+        guardar();
+    }
+
+    private void btnAgregarEstacionActionPerformed(java.awt.event.ActionEvent evt) {
+        agregarEstacion();
+    }
+
+    private void btnAgregarConexionActionPerformed(java.awt.event.ActionEvent evt) {
+        agregarConexion();
+    }
+
+    private void btnEliminarEstacionActionPerformed(java.awt.event.ActionEvent evt) {
+        eliminarEstacion();
+    }
+
+    private void btnEliminarConexionActionPerformed(java.awt.event.ActionEvent evt) {
+        eliminarConexion();
+    }
+
+    private void btnRutaActionPerformed(java.awt.event.ActionEvent evt) {
+        mostrarRuta();
+    }
+
+    private void btnSubredesActionPerformed(java.awt.event.ActionEvent evt) {
+        mostrarSubredes();
+    }
+
+    private void btnHubsActionPerformed(java.awt.event.ActionEvent evt) {
+        mostrarHubs();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarConexion;
     private javax.swing.JButton btnAgregarEstacion;
