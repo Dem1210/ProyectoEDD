@@ -8,97 +8,75 @@ package proyecto_castillo_ordaz_salazar;
  *
  * @author ameli
  */
+
 public class TablaHash<V> {
-    private static final double FACTOR_CARGA_MAX = 0.75;
 
     private static class Nodo<V> {
-        final String clave; V valor; Nodo<V> sig;
-        Nodo(String clave, V valor, Nodo<V> sig) { this.clave = clave; this.valor = valor; this.sig = sig; }
-    }
+        String clave;
+        V valor;
+        Nodo<V> siguiente;
 
-    private Nodo<V>[] cubetas;
-    private int tamano;
-
-
-    @SuppressWarnings("unchecked")
-    public TablaHash(int capacidadInicial) {
-        cubetas = (Nodo<V>[]) new Nodo[Math.max(11, capacidadInicial)];
-    }
-
-
-    private int indice(String clave, int largo) {
-        int h = 0;
-        for (int i = 0; i < clave.length(); i++) h = 31 * h + clave.charAt(i);
-        return (h & 0x7fffffff) % largo;
-    }
-
-  
-    public void poner(String clave, V valor) {
-        int i = indice(clave, cubetas.length);
-        for (Nodo<V> n = cubetas[i]; n != null; n = n.sig) {
-            if (n.clave.equals(clave)) { n.valor = valor; return; }
+        Nodo(String clave, V valor) {
+            this.clave = clave;
+            this.valor = valor;
         }
-        cubetas[i] = new Nodo<>(clave, valor, cubetas[i]);
-        tamano++;
-        if (tamano > cubetas.length * FACTOR_CARGA_MAX) rehash();
     }
 
+    private Nodo<V>[] tabla;
 
+    /** Crea la tabla con la cantidad de posiciones indicada. */
+    @SuppressWarnings("unchecked")
+    public TablaHash(int capacidad) {
+        tabla = (Nodo<V>[]) new Nodo[capacidad];
+    }
+
+    /** Función hash: suma de los caracteres por su posición, módulo el tamaño. */
+    private int indice(String clave) {
+        int suma = 0;
+        for (int i = 0; i < clave.length(); i++) {
+            suma += clave.charAt(i) * (i + 1);
+        }
+        return Math.abs(suma % tabla.length);
+    }
+
+    /** Guarda el valor; si la clave ya existe lo reemplaza. */
+    public void poner(String clave, V valor) {
+        int i = indice(clave);
+        for (Nodo<V> n = tabla[i]; n != null; n = n.siguiente) {
+            if (n.clave.equals(clave)) {
+                n.valor = valor;
+                return;
+            }
+        }
+        Nodo<V> nuevo = new Nodo<>(clave, valor);
+        nuevo.siguiente = tabla[i];
+        tabla[i] = nuevo;
+    }
+
+    /** Devuelve el valor de la clave o null si no existe. */
     public V obtener(String clave) {
-        for (Nodo<V> n = cubetas[indice(clave, cubetas.length)]; n != null; n = n.sig) {
-            if (n.clave.equals(clave)) return n.valor;
+        for (Nodo<V> n = tabla[indice(clave)]; n != null; n = n.siguiente) {
+            if (n.clave.equals(clave)) {
+                return n.valor;
+            }
         }
         return null;
     }
 
-
-    public boolean contiene(String clave) {
-        for (Nodo<V> n = cubetas[indice(clave, cubetas.length)]; n != null; n = n.sig) {
-            if (n.clave.equals(clave)) return true;
-        }
-        return false;
-    }
-
-
-    public boolean eliminar(String clave) {
-        int i = indice(clave, cubetas.length);
-        Nodo<V> previo = null;
-        for (Nodo<V> n = cubetas[i]; n != null; previo = n, n = n.sig) {
+    /** Elimina la clave de la tabla. */
+    public void eliminar(String clave) {
+        int i = indice(clave);
+        Nodo<V> anterior = null;
+        for (Nodo<V> n = tabla[i]; n != null; n = n.siguiente) {
             if (n.clave.equals(clave)) {
-                if (previo == null) cubetas[i] = n.sig; else previo.sig = n.sig;
-                tamano--;
-                return true;
+                if (anterior == null) {
+                    tabla[i] = n.siguiente;
+                } else {
+                    anterior.siguiente = n.siguiente;
+                }
+                return;
             }
-        }
-        return false;
-    }
-
-
-    public int tamano() { return tamano; }
-
-  
-    public String[] claves() {
-        String[] res = new String[tamano];
-        int k = 0;
-        for (int i = 0; i < cubetas.length; i++)
-            for (Nodo<V> n = cubetas[i]; n != null; n = n.sig) res[k++] = n.clave;
-        return res;
-    }
-
-
-    @SuppressWarnings("unchecked")
-    private void rehash() {
-        Nodo<V>[] viejas = cubetas;
-        cubetas = (Nodo<V>[]) new Nodo[viejas.length * 2 + 1];
-        for (int i = 0; i < viejas.length; i++) {
-            Nodo<V> n = viejas[i];
-            while (n != null) {
-                Nodo<V> sig = n.sig;
-                int j = indice(n.clave, cubetas.length);
-                n.sig = cubetas[j];
-                cubetas[j] = n;
-                n = sig;
-            }
+            anterior = n;
         }
     }
 }

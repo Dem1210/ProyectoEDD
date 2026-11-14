@@ -4,26 +4,23 @@
  */
 package proyecto_castillo_ordaz_salazar;
 
-
-
 /**
+ * Lista enlazada con las conexiones de una estación.
  *
  * @author ydccm
  */
 public class Lista_Adyacencia {
 
-
     Nodo_Adyacencia primero;
-
     int tamano;
 
-
+    /** Crea una lista vacía. */
     public Lista_Adyacencia() {
         this.primero = null;
         this.tamano = 0;
     }
 
-
+    /** Inserta una conexión al final. */
     public void insertar(Estacion dato, int tiempo) {
         Nodo_Adyacencia nuevo = new Nodo_Adyacencia(dato,tiempo);
         Nodo_Adyacencia aux = primero;
@@ -39,7 +36,7 @@ public class Lista_Adyacencia {
         tamano++;
     }
 
-
+    /** Elimina la conexión hacia el id indicado; devuelve true si existía. */
     public boolean eliminar(String id) {
         Nodo_Adyacencia aux = primero;
 
@@ -63,6 +60,7 @@ public class Lista_Adyacencia {
         return false;
     }
 
+    /** Busca la conexión hacia el id indicado (null si no existe). */
     public Nodo_Adyacencia buscar(String id) {
         Nodo_Adyacencia aux = primero;
 
@@ -72,25 +70,7 @@ public class Lista_Adyacencia {
         return aux;
     }
 
-
-    public String imprimir() {
-        Nodo_Adyacencia aux = primero;
-        String im = "";
-
-        while (aux != null) {
-            im += "ID: " + aux.dato.id + "\n";
-            im += "Nombre: " + aux.dato.nombre + "\n";
-            im += "Línea: " + aux.dato.linea + "\n";
-            im += "Zona: " + aux.dato.zona + "\n";
-            im += "Capacidad: " + aux.dato.cap_pasajeros_hora + "\n";
-            im += "--------------------------\n";
-
-            aux = aux.siguiente;
-
-        }
-        return im;
-    }
-    
+    /** Devuelve los ids de los vecinos. */
     public String imprimir2(){
         Nodo_Adyacencia aux = primero;
         String im = "";
